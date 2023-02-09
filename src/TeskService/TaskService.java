@@ -59,7 +59,7 @@ public class TaskService {
         } else {
             System.out.println("Tasks for today: ");
             for (Task task : todayTasks) {
-                System.out.println("Task id: " + task.getId() + " Title: " + task.getTitle() + "Description: " + task.getDescription() + " Time: " + task.getDueDate().toLocalTime());
+                System.out.println("Task id: " + task.getId() + " Title: " + task.getTitle() + " Description: " + task.getDescription() + " Time: " + task.getDueDate().toLocalTime());
             }
         }
     }
