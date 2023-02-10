@@ -30,7 +30,7 @@ public class Main {
                     String description = scan.next();
                     System.out.print("Enter task due date (yyyy-MM-dd): ");
                     String dueDate = scan.next();
-                    System.out.print("Enter task due time (HH:mm:ss): ");
+                    System.out.print("Enter task due time (HH:mm): ");
                     String dueTime = scan.next();
                     String dueDateTime = dueDate + "T" + dueTime;
                     LocalDateTime taskDueDateTime = LocalDateTime.parse(dueDateTime);

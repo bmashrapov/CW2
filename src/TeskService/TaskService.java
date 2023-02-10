@@ -67,6 +67,10 @@ public class TaskService {
     public List<Task> getTasksForToday() {
         List<Task> todayTasks = new ArrayList<>();
         LocalDate today = LocalDate.now();
+//        for (int i = 0; i < tasks.size() + 1; i++) {
+//            if (tasks.get(i).getNextDate().toLocalDate().equals(today)) {
+//                todayTasks.add(tasks.get(i));
+//            }
         for (Task task : tasks.values()) {
             if (task.getDueDate().toLocalDate().equals(today)) {
                 todayTasks.add(task);
