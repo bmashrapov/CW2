@@ -1,6 +1,8 @@
 import Task.Task;
 import TeskService.TaskService;
 import TaskType.Recurrence;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import TaskType.TaskType;
@@ -17,7 +19,7 @@ public class Main {
         while (continueLoop) {
             System.out.println("1. Add task");
             System.out.println("2. Remove task");
-            System.out.println("3. Show tasks for today");
+            System.out.println("3. Show tasks by date");
             System.out.println("4. Show deleted tasks");
             System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
@@ -67,7 +69,10 @@ public class Main {
                     taskService.removeTask(id);
                     break;
                 case 3:
-                    taskService.printTasksForToday();
+                    System.out.print("Enter the date for which you want to see the tasks (yyyy-MM-dd): ");
+                    String specificDate = scan.next();
+                    LocalDate specificLocalDate = LocalDate.parse(specificDate);
+                    taskService.printTasksForSpecificDay(specificLocalDate);
                     break;
                 case 4:
                     taskService.printDeletedTasks();

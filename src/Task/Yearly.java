@@ -12,6 +12,10 @@ public class Yearly extends Task implements Recurrence {
 
     @Override
     public LocalDateTime getNextDate(LocalDateTime createdAt) {
-        return createdAt.plusYears(1);
+        return getDueDate().plusYears(1);
+    }
+    @Override
+    public String toString() {
+        return " Type recurrence - Yearly ";
     }
 }

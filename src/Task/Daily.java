@@ -11,6 +11,10 @@ public class Daily extends Task implements Recurrence {
     }
     @Override
     public LocalDateTime getNextDate(LocalDateTime createdAt) {
-        return createdAt.plusDays(1);
+        return getDueDate().plusDays(1);
+    }
+    @Override
+    public String toString() {
+        return " Type recurrence - Daily ";
     }
 }

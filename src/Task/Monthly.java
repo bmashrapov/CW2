@@ -12,6 +12,10 @@ public class Monthly extends Task implements Recurrence {
 
     @Override
     public LocalDateTime getNextDate(LocalDateTime createdAt) {
-        return createdAt.plusMonths(1);
+        return getDueDate().plusMonths(1);
+    }
+    @Override
+    public String toString() {
+        return " Type recurrence - Monthly ";
     }
 }

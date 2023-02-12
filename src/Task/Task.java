@@ -54,7 +54,12 @@ public class Task {
     }
 
     public LocalDateTime getNextDate() {
-        return recurrence.getNextDate(createdAt);
+        return recurrence.getNextDate(dueDate);
     }
+
+//    @Override
+////    public String toString() {
+////        return " Type recurrence " + getRecurrence();
+////    }
 }
 

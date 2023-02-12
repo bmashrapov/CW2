@@ -52,31 +52,52 @@ public class TaskService {
         }
     }
 
-    public void printTasksForToday() {
-        List<Task> todayTasks = getTasksForToday();
-        if (todayTasks.isEmpty()) {
-            System.out.println("There are no tasks for today, rest!");
-        } else {
-            System.out.println("Tasks for today: ");
-            for (Task task : todayTasks) {
-                System.out.println("Task id: " + task.getId() + " Title: " + task.getTitle() + " Description: " + task.getDescription() + " Time: " + task.getDueDate().toLocalTime());
-            }
+//    public void printTasksForToday() {
+//        List<Task> todayTasks = getTasksForToday();
+//        if (todayTasks.isEmpty()) {
+//            System.out.println("There are no tasks for today, rest!");
+//        } else {
+//            System.out.println("Tasks for today: ");
+//            for (Task task : todayTasks) {
+//                System.out.println("Task id: " + task.getId() + " Title: " + task.getTitle() + " Description: " + task.getDescription() + " Time: " + task.getDueDate().toLocalTime() +  task.getRecurrence() + " Next due date: " + task.getNextDate());
+//            }
+//        }
+//    }
+//
+//    public List<Task> getTasksForToday() {
+//        List<Task> todayTasks = new ArrayList<>();
+//        LocalDate today = LocalDate.now();
+////        for (int i = 0; i < tasks.size() + 1; i++) {
+////            if (tasks.get(i).getNextDate().toLocalDate().equals(today)) {
+////                todayTasks.add(tasks.get(i));
+////            }
+//        for (Task task : tasks.values()) {
+//            if (task.getDueDate().toLocalDate().equals(today)) {
+//                todayTasks.add(task);
+//            }
+//        }
+//        return todayTasks;
+//    }
+public void printTasksForSpecificDay(LocalDate date) {
+    List<Task> dayTasks = getTasksForDay(date);
+    if (dayTasks.isEmpty()) {
+        System.out.println("There are no tasks for " + date + ", rest!");
+    } else {
+        System.out.println("Tasks for " + date + ": ");
+        for (Task task : dayTasks) {
+            System.out.println("Task id: " + task.getId() + " Title: " + task.getTitle() + " Description: " + task.getDescription() + " Time: " + task.getDueDate().toLocalTime() +  task.getRecurrence() + " Next due date: " + task.getNextDate());
         }
     }
+}
 
-    public List<Task> getTasksForToday() {
-        List<Task> todayTasks = new ArrayList<>();
-        LocalDate today = LocalDate.now();
-//        for (int i = 0; i < tasks.size() + 1; i++) {
-//            if (tasks.get(i).getNextDate().toLocalDate().equals(today)) {
-//                todayTasks.add(tasks.get(i));
-//            }
+    public List<Task> getTasksForDay(LocalDate date) {
+        List<Task> dayTasks = new ArrayList<>();
         for (Task task : tasks.values()) {
-            if (task.getDueDate().toLocalDate().equals(today)) {
-                todayTasks.add(task);
+            if (task.getDueDate().toLocalDate().equals(date)) {
+                dayTasks.add(task);
             }
         }
-        return todayTasks;
+        return dayTasks;
     }
 
     public Map<Long, Task> getTasks() {

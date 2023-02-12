@@ -14,4 +14,8 @@ public class OneTime extends Task implements Recurrence {
     public LocalDateTime getNextDate(LocalDateTime createdAt) {
         return null;
     }
+    @Override
+    public String toString() {
+        return " Type recurrence - One Time ";
+    }
 }

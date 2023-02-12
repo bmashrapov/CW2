@@ -12,6 +12,11 @@ public class Weekly extends Task implements Recurrence {
 
     @Override
     public LocalDateTime getNextDate(LocalDateTime createdAt) {
-        return createdAt.plusWeeks(1);
+        return getDueDate().plusWeeks(1);
+    }
+
+    @Override
+    public String toString() {
+        return " Type recurrence - Weekly ";
     }
 }
