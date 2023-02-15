@@ -1,11 +1,8 @@
 package TeskService;
 
-import TaskType.Recurrence;
 import Task.Task;
-import TaskType.TaskType;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class TaskService {
@@ -55,7 +52,7 @@ public class TaskService {
     }
 
     public void printTasksForSpecificDay(LocalDate date) {
-        List<Task> dayTasks = getTasksForDay(date);
+        Collection<Task> dayTasks = getTasksForDay(date);
         if (dayTasks.isEmpty()) {
             System.out.println("There are no tasks for " + date + ", rest!");
         } else {
@@ -66,7 +63,7 @@ public class TaskService {
         }
     }
 
-    public List<Task> getTasksForDay(LocalDate date) {
+    public Collection<Task> getTasksForDay(LocalDate date) {
         List<Task> dayTasks = new ArrayList<>();
 //        for (int i = 0; i < tasks.size()+1; i++) {
 //            if (tasks.get(i).appearsIn(date)) {
@@ -74,12 +71,47 @@ public class TaskService {
         for (Task task : tasks.values()) {
             if (task.appearsIn(date)) {
                 dayTasks.add(task);
+            } else {
+                LocalDate nextDate = LocalDate.from(task.getNextDate());
+                while (nextDate.isBefore(date)) {
+                    nextDate = LocalDate.from(task.getNextDate());
+                }
+                if (nextDate.equals(date)) {
+                    dayTasks.add(task);
+                }
             }
-
         }
         return dayTasks;
     }
 
+//public List<Task> getTasksForDay(LocalDate date) {
+//    List<Task> dayTasks = new ArrayList<>();
+//    for (Task task : tasks.values()) {
+//        if (task.appearsIn(date)) {
+//            dayTasks.add(task);
+//        }
+//        LocalDate nextDate = task.getNextDate();
+//        while (nextDate.isBefore(date.plusDays(1))) {
+//            if (task.appearsIn(nextDate)) {
+//                dayTasks.add(task);
+//            }
+//            nextDate = task.getNextDate();
+//        }
+//    }
+//    return dayTasks;
+//}
+//public Collection<Task> getTasksForDay(LocalDate date) {                                                              // получение списка задач по текущей дате
+//    ArrayList<Task> list = new ArrayList<>();
+//    for (int i = 1; i < tasks.size () + 1; i++) {
+//        if (tasks.get ( i ).appearsIn ( date )) {
+//            list.add ( tasks.get ( i ) );
+//        }
+//    }
+//    if (list.isEmpty ()){
+//        System.out.println ("На сегодня у вас нет задач");
+//    }
+//    return list;
+//}
     public Map<Long, Task> getTasks() {
         return tasks;
     }
