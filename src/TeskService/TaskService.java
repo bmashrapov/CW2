@@ -13,10 +13,12 @@ public class TaskService {
     private Map<Long, Task> deletedTasks = new HashMap<>();
     private long taskId = 0L;
 
-    public Task createTask(String title, String description, TaskType type, Recurrence recurrence, LocalDateTime dueDate) {
-        Task task = new Task(++taskId, title, description, type, recurrence, LocalDateTime.now(), dueDate);
-        tasks.put(taskId, task);
-        return task;
+    public void createTask(Task task) {
+        task.setId(++taskId);
+        tasks.put(task.getId(), task);
+//        Task tasks = new Task(++taskId, title, description, type, recurrence, LocalDateTime.now(), dueDate);
+//        tasks.put(taskId, task);
+
     }
 
     public void removeTaskPrint() {
@@ -26,7 +28,7 @@ public class TaskService {
                 System.out.println("Task id: " + task.getId() + " Title: " + task.getTitle() + " Date: " + task.getDueDate());
             }
         } else {
-            System.out.println("No tasks!");
+            System.out.println("No tasks! Type 1 and hit enter to leave the delete task menu.");
         }
     }
 
@@ -52,50 +54,28 @@ public class TaskService {
         }
     }
 
-//    public void printTasksForToday() {
-//        List<Task> todayTasks = getTasksForToday();
-//        if (todayTasks.isEmpty()) {
-//            System.out.println("There are no tasks for today, rest!");
-//        } else {
-//            System.out.println("Tasks for today: ");
-//            for (Task task : todayTasks) {
-//                System.out.println("Task id: " + task.getId() + " Title: " + task.getTitle() + " Description: " + task.getDescription() + " Time: " + task.getDueDate().toLocalTime() +  task.getRecurrence() + " Next due date: " + task.getNextDate());
-//            }
-//        }
-//    }
-//
-//    public List<Task> getTasksForToday() {
-//        List<Task> todayTasks = new ArrayList<>();
-//        LocalDate today = LocalDate.now();
-////        for (int i = 0; i < tasks.size() + 1; i++) {
-////            if (tasks.get(i).getNextDate().toLocalDate().equals(today)) {
-////                todayTasks.add(tasks.get(i));
-////            }
-//        for (Task task : tasks.values()) {
-//            if (task.getDueDate().toLocalDate().equals(today)) {
-//                todayTasks.add(task);
-//            }
-//        }
-//        return todayTasks;
-//    }
-public void printTasksForSpecificDay(LocalDate date) {
-    List<Task> dayTasks = getTasksForDay(date);
-    if (dayTasks.isEmpty()) {
-        System.out.println("There are no tasks for " + date + ", rest!");
-    } else {
-        System.out.println("Tasks for " + date + ": ");
-        for (Task task : dayTasks) {
-            System.out.println("Task id: " + task.getId() + " Title: " + task.getTitle() + " Description: " + task.getDescription() + " Time: " + task.getDueDate().toLocalTime() +  task.getRecurrence() + " Next due date: " + task.getNextDate());
+    public void printTasksForSpecificDay(LocalDate date) {
+        List<Task> dayTasks = getTasksForDay(date);
+        if (dayTasks.isEmpty()) {
+            System.out.println("There are no tasks for " + date + ", rest!");
+        } else {
+            System.out.println("Tasks for " + date + ": ");
+            for (Task task : dayTasks) {
+                System.out.println("Task id: " + task.getId() + " Title: " + task.getTitle() + " Description: " + task.getDescription() + " Time: " + task.getDueDate().toLocalTime() + task.getRecurrence() + " Next due date: " + task.getNextDate());
+            }
         }
     }
-}
 
     public List<Task> getTasksForDay(LocalDate date) {
         List<Task> dayTasks = new ArrayList<>();
+//        for (int i = 0; i < tasks.size()+1; i++) {
+//            if (tasks.get(i).appearsIn(date)) {
+//                dayTasks.add(tasks.get(i));
         for (Task task : tasks.values()) {
-            if (task.getDueDate().toLocalDate().equals(date)) {
+            if (task.appearsIn(date)) {
                 dayTasks.add(task);
             }
+
         }
         return dayTasks;
     }
@@ -127,6 +107,10 @@ public void printTasksForSpecificDay(LocalDate date) {
 
     public Map<Long, Task> getDeletedTasks() {
         return deletedTasks;
+    }
+
+    public void setTaskId(long taskId) {
+        this.taskId = taskId;
     }
 }
 

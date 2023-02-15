@@ -4,13 +4,16 @@ import TaskType.Recurrence;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 import TaskType.TaskType;
 import Task.OneTime;
 import Task.Daily;
 import Task.Weekly;
 import Task.Monthly;
 import Task.Yearly;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in).useDelimiter("\\n");
@@ -44,22 +47,23 @@ public class Main {
                     Recurrence recurrence = null;
                     switch (recurrenceType) {
                         case 0:
-                            recurrence = new OneTime(0,"","",type,recurrence,taskDueDateTime,taskDueDateTime);
+                            recurrence = new OneTime(0, "", "", type, recurrence, taskDueDateTime, taskDueDateTime);
                             break;
                         case 1:
-                            recurrence = new Daily(0,"","",type,recurrence,taskDueDateTime,taskDueDateTime);
+                            recurrence = new Daily(0, "", "", type, recurrence, taskDueDateTime, taskDueDateTime);
                             break;
                         case 2:
-                            recurrence = new Weekly(0,"","",type,recurrence,taskDueDateTime,taskDueDateTime);
+                            recurrence = new Weekly(0, "", "", type, recurrence, taskDueDateTime, taskDueDateTime);
                             break;
                         case 3:
-                            recurrence = new Monthly(0,"","",type,recurrence,taskDueDateTime,taskDueDateTime);
+                            recurrence = new Monthly(0, "", "", type, recurrence, taskDueDateTime, taskDueDateTime);
                             break;
                         case 4:
-                            recurrence = new Yearly(0,"","",type,recurrence,taskDueDateTime,taskDueDateTime);
+                            recurrence = new Yearly(0, "", "", type, recurrence, taskDueDateTime, taskDueDateTime);
                             break;
                     }
-                    Task task = taskService.createTask(title, description, type, recurrence, taskDueDateTime);
+                    Task task = new OneTime(0, title, description, type, recurrence, LocalDateTime.now(), taskDueDateTime);
+                    taskService.createTask(task);
                     System.out.println("Task added with id: " + task.getId());
                     break;
                 case 2:

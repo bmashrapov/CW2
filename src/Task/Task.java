@@ -3,9 +3,10 @@ package Task;
 import TaskType.Recurrence;
 import TaskType.TaskType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Task {
+public abstract class Task {
     private long id;
     private String title;
     private String description;
@@ -57,7 +58,12 @@ public class Task {
         return recurrence.getNextDate(dueDate);
     }
 
-//    @Override
+    public abstract boolean appearsIn(LocalDate date);
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    //    @Override
 ////    public String toString() {
 ////        return " Type recurrence " + getRecurrence();
 ////    }
