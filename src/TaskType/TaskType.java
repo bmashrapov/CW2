@@ -1,2 +1,5 @@
-package TaskType;public enum TaskType {
+package TaskType;
+
+public enum TaskType {
+    PERSONAL, WORK
 }
